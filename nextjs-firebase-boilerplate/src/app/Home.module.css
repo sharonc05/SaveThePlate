@@ -1,0 +1,114 @@
+/* Home.module.css */
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  padding-top: 85px; /* Adjust this value based on the actual height of your navbar */
+  min-height: 100vh;
+  background: rgb(235, 255, 234);
+  color: black;
+}
+
+.topFixedNav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 12px 0;
+  border-bottom: 1px solid #d1d5db;
+  background: rgb(203, 222, 255);
+  z-index: 1000;
+}
+
+.navLink {
+  color: #333; /* Styling for link text */
+  text-decoration: none; /* Remove underline from links */
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navLink:hover {
+  background-color: #f3f4f6; /* bg-gray-100 */
+  color: #0070f3; /* Light blue hover effect */
+}
+
+.staticNav {
+  position: static;
+  width: auto;
+  border: 1px solid #d1d5db;
+  background-color: #e2e8f0;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 48px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  width: 100%;
+  background: linear-gradient(to top, white, #f8fafc);
+}
+
+.beforeElement {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.afterElement {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkBox {
+  display: grid;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.link {
+  display: block;
+  padding: 16px;
+  border-radius: 10px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.link:hover {
+  border-color: #d1d5db; /* border-gray-300 */
+  background-color: #f3f4f6; /* bg-gray-100 */
+}
+
+.titleContainer {
+  text-align: center;
+  margin-top: 20px; /* Adjust as needed */
+}
+
+.contentSection {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #f9f9f9; /* Light background for the content area */
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  background: #e2e8f0;
+}
