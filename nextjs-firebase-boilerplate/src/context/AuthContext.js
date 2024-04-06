@@ -1,6 +1,6 @@
 'use client'
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, User, signOut } from 'firebase/auth';
 import firebase_app from '@/firebase/config';
 
 // Initialize Firebase auth instance
@@ -35,9 +35,18 @@ export function AuthContextProvider( { children } ) {
     return () => unsubscribe();
   }, [] );
 
+  // the logout function
+  const logout = async () => {
+    try {
+      await signOut(auth);  // Sign out the current user
+    } catch (error) {
+      console.error('Failed to sign out:', error);
+    }
+  };
+  
   // Provide the authentication context to child components
   return (
-    <AuthContext.Provider value={{ user }}>
+    <AuthContext.Provider value={{ user, logout }}>
       {loading ? <div>Loading...</div> : children}
     </AuthContext.Provider>
   );

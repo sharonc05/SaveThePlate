@@ -1,38 +1,79 @@
+'use client'
 import Link from 'next/link';
+import { useAuthContext } from "@/context/AuthContext";
+import { useRouter } from "next/navigation"; // Corrected import path
+import { useEffect } from "react";
 import styles from './Home.module.css';
 import Head from 'next/head';
 
-export default function Home() {
+function Page() {
+  const { user, logout } = useAuthContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to the home page if the user is not logged in
+    if (!user) {
+      router.push("/");
+    }
+  }, [user, router]);
+
+  const handleLogout = () => {
+    logout(); // Call logout from context
+    router.push("/signin"); // Redirect to signin page after logout
+  };
+
   return (
     <>
       <Head>
-        <title>Home Page - Your Site Name</title>
-        <meta name="description" content="Welcome to the homepage of our site where you can learn more about our services and offerings." />
+        <title>Welcome to SaveThePlates</title>
+        <meta name="description" content="Restricted content page for logged-in users only." />
       </Head>
       <main className={styles.mainContainer}>
         <div className={styles.topFixedNav}>
-          <Link href="/signin" legacyBehavior>
-            <a className={styles.navLink}>Login</a>
-          </Link>
-          <Link href="/signup" legacyBehavior>
-            <a className={styles.navLink}>Signup</a>
-          </Link>
           <Link href="/" legacyBehavior>
             <a className={styles.navLink}>Home</a>
           </Link>
+          {user ? (
+            <>
+              <Link href="/profile" legacyBehavior>
+                <a className={styles.navLink}>Profile</a>
+              </Link>
+              <Link href="/settings" legacyBehavior>
+                <a className={styles.navLink}>Settings</a>
+              </Link>
+              <button onClick={handleLogout} className={styles.navLink}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/signin" legacyBehavior>
+                <a className={styles.navLink}>Login</a>
+              </Link>
+              <Link href="/signup" legacyBehavior>
+                <a className={styles.navLink}>Signup</a>
+              </Link>
+            </>
+          )}
         </div>
 
-        {/* Title and introductory content */}
-        <div className={styles.titleContainer}>
-          <h1>Welcome to SaveThePlate!!</h1>
-          <p>Explore the features and services we offer and learn how they can benefit you. Join us to get the most out of our platform.</p>
-        </div>
-
-        {/* Additional content can follow here */}
-        <div className={styles.contentSection}>
-          <p>Welcome to Save the Plate!</p>
-        </div>
+        {user ? (
+            <>
+              <div className={styles.contentSection}>
+                <p>You are now viewing content exclusive to our members.</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={styles.contentSection}>
+                <h1>Welcome to SaveThePlates</h1>
+                <p>Login to get started.</p>
+              </div>
+            </>
+          )}
       </main>
     </>
   );
 }
+
+export default Page;
